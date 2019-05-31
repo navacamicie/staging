@@ -20,7 +20,6 @@ definitions:
           - bundle exec jekyll new --force --skip-bundle .
           - bundle install
           - bundle exec jekyll build
-          - ls build
           - rm bitbucket-pipelines.yml
           - rm -rf vendor
           - rm CNAME
