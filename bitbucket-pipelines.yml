@@ -14,12 +14,6 @@ definitions:
         script:
           - gem install jekyll bundler
           - jekyll build
-          - rm bitbucket-pipelines.yml
-          - rm -rf vendor
-          - rm CNAME
-          - rm Gemfile*
-          - rm *.md
-          - rm -rf _posts
         artifacts:
           - _site/**
 
