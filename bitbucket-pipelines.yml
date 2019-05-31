@@ -10,12 +10,12 @@ pipelines:
     develop:
     - step:
         name: Deploy to github pages (test)
-        deployment: deploy_test
+        deployment: test
         script:
           - echo "Deploying to test environment"
     master:      
     - step:
         name: Deploy to github pages (production)
-        deployment: deploy_production
+        deployment: production
         script:
           - echo "Deploying to production environment"
