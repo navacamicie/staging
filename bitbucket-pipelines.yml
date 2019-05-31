@@ -36,7 +36,7 @@ pipelines:
         deployment: test
         script:
           - rm CNAME
-          - git remote set-url origin https://${GitHub_User}:${GitHub_Token}@github.com/navacamicie/navacamicie-test.github.io.git
+          - git remote set-url origin https://${GitHub_User}:${GitHub_Token}@github.com/navacamicie/beta.git
           - git add .
           - git commit -a -m "auto build ${BITBUCKET_BUILD_NUMBER}"
           - git push -f
