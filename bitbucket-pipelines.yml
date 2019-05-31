@@ -38,11 +38,10 @@ pipelines:
           - git add .
           - git commit -a -m "auto build ${BITBUCKET_BUILD_NUMBER}"
           - ./versiontag current
-          - git push -f --tags
-          - git fetch origin
+          - git push -f; git push --tags
           - git checkout -b master
           - git merge ${BITBUCKET_BRANCH}
-          - git push -f --tags
+          - git push -f; git push --tags
 
     feature/*:
     - step: *build
@@ -58,10 +57,10 @@ pipelines:
           - git add .
           - git commit -a -m "auto build ${BITBUCKET_BUILD_NUMBER}"
           - ./versiontag current
-          - git push -f --tags
+          - git push -f; git push --tags
           - git checkout -b master
           - git merge ${BITBUCKET_BRANCH}
-          - git push -f --tags
+          - git push -f; git push --tags
 
     develop:
     - step: *build
@@ -77,11 +76,10 @@ pipelines:
           - git add .
           - git commit -a -m "auto build ${BITBUCKET_BUILD_NUMBER}"
           - ./versiontag current
-          - git push -f --tags
-          - git fetch origin
+          - git push -f; git push --tags
           - git checkout -b master
           - git merge ${BITBUCKET_BRANCH}
-          - git push -f --tags
+          - git push -f; git push --tags
 
     master:
     - step: *build
@@ -93,6 +91,6 @@ pipelines:
           - git remote set-url origin https://${GitHub_User}:${GitHub_Token}@github.com/navacamicie/navacamicie.github.io.git
           - git add .
           - git commit -a -m "auto build ${BITBUCKET_BUILD_NUMBER}"
-          - git push -f --tags
+          - git push -f; git push --tags
 
 
