@@ -12,17 +12,15 @@ definitions:
     - step: &build
         name: Build project
         script:
-          - curl -L \
-            https://raw.githubusercontent.com/franiglesias/versiontag/master/versiontag \
-            -o /usr/local/bin/versiontag \
-            && chmod +x /usr/local/bin/versiontag \
-            && versiontag help
+          - curl -L https://raw.githubusercontent.com/franiglesias/versiontag/master/versiontag -o versiontag
+          - chmod +x versiontag && ./versiontag help
           - gem install jekyll
           - jekyll build
           - rm _site/bitbucket-pipelines.yml
           - rm bitbucket-pipelines.yml
         artifacts:
           - _site/**
+          - versiontag
 
 pipelines:
   branches:
