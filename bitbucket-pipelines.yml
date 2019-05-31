@@ -34,19 +34,15 @@ pipelines:
           - rm _site/CNAME
           - ./versiontag current
           - ./versiontag major  -m 'auto build ${BITBUCKET_BUILD_NUMBER}' --force
-          - git checkout -b master
-          - git merge $BITBUCKET_BRANCH
-          - git push -f
-          - git checkout $BITBUCKET_BRANCH
           - git remote set-url origin https://${GitHub_User}:${GitHub_Token}@github.com/navacamicie/candidate-release.git
           - git add .
           - git commit -a -m "auto build ${BITBUCKET_BUILD_NUMBER}"
           - ./versiontag current
-          - git push -f
+          - git push -f --tags
           - git fetch origin
           - git checkout -b master
           - git merge $BITBUCKET_BRANCH
-          - git push -f
+          - git push -f --tags
 
     feature/*:
     - step: *build
@@ -58,19 +54,15 @@ pipelines:
           - rm _site/CNAME
           - ./versiontag current
           - ./versiontag patch  -m 'auto build ${BITBUCKET_BUILD_NUMBER}' --force
-          - git checkout -b master
-          - git merge $BITBUCKET_BRANCH
-          - git push -f
-          - git checkout $BITBUCKET_BRANCH
           - git remote set-url origin https://${GitHub_User}:${GitHub_Token}@github.com/navacamicie/sandbox.git
           - git add .
           - git commit -a -m "auto build ${BITBUCKET_BUILD_NUMBER}"
           - ./versiontag current
-          - git push -f
+          - git push -f --tags
           - git fetch origin
           - git checkout -b master
           - git merge $BITBUCKET_BRANCH
-          - git push -f
+          - git push -f --tags
 
     develop:
     - step: *build
@@ -86,11 +78,11 @@ pipelines:
           - git add .
           - git commit -a -m "auto build ${BITBUCKET_BUILD_NUMBER}"
           - ./versiontag current
-          - git push -f
+          - git push -f --tags
           - git fetch origin
           - git checkout -b master
           - git merge $BITBUCKET_BRANCH
-          - git push -f
+          - git push -f --tags
 
     master:
     - step: *build
@@ -102,6 +94,6 @@ pipelines:
           - git remote set-url origin https://${GitHub_User}:${GitHub_Token}@github.com/navacamicie/navacamicie.github.io.git
           - git add .
           - git commit -a -m "auto build ${BITBUCKET_BUILD_NUMBER}"
-          - git push -f
+          - git push -f --tags
 
 
