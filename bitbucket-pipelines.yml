@@ -3,19 +3,41 @@
 # Only use spaces to indent your .yml configuration.
 # -----
 # You can specify a custom docker image from Docker Hub as your build environment.
-image: atlassian/default-image:2
+image: ruby:2.5
 
 pipelines:
+  default:
+    - step: 
+        name: Build project (test)
+        caches:
+          - bundler
+        script:
+          - bundle install --path vendor/bundle
+          - bundle exec jekyll build --destination public
+          - mkdir dist
+          - tar -czvf dist/package-${BITBUCKET_BUILD_NUMBER}.tar.gz -C public .
+        artifacts:
+          - dist/**
   branches:
     develop:
     - step:
+        image: alpine
         name: Deploy to github pages (test)
         deployment: test
         script:
           - echo "Deploying to test environment"
+          - tar -xf dist/package-${BITBUCKET_BUILD_NUMBER}.tar.gz -C upload
+          - cd upload; git remote set-url https://${GitHub_User}:${GitHub_Token}@github.com/navacamicie/navacamicie-test.github.io.git
+          - git commit -a -m "Auto built ${BITBUCKET_BUILD_NUMBER}"
+          - git push
     master:      
     - step:
+        image: alpine
         name: Deploy to github pages (production)
         deployment: production
         script:
           - echo "Deploying to production environment"
+          - 
+definitions:
+  caches:
+    bundler: vendor/bundle
