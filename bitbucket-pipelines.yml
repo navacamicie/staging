@@ -12,10 +12,10 @@ definitions:
     - step: &build
         name: Build project
         script:
-          - sudo curl -L \
+          - curl -L \
             https://raw.githubusercontent.com/franiglesias/versiontag/master/versiontag \
             -o /usr/local/bin/versiontag \
-            && sudo chmod +x /usr/local/bin/versiontag \
+            && chmod +x /usr/local/bin/versiontag \
             && versiontag help
           - gem install jekyll
           - jekyll build
