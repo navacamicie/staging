@@ -6,13 +6,16 @@
 image: atlassian/default-image:2
 
 pipelines:
-  default:
+  branches:
+    develop:
     - step:
-        script:
-          - echo "Everything is awesome!"
-    - step:
-        name: Deploy to test
-        deployment: test
-        # trigger: manual  # Uncomment to make this a manual deployment.
+        name: Deploy to github pages (test)
+        deployment: deploy_test
         script:
           - echo "Deploying to test environment"
+    master:      
+    - step:
+        name: Deploy to github pages (production)
+        deployment: deploy_production
+        script:
+          - echo "Deploying to production environment"
