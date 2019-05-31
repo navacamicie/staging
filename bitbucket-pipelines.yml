@@ -59,7 +59,6 @@ pipelines:
           - git commit -a -m "auto build ${BITBUCKET_BUILD_NUMBER}"
           - ./versiontag current
           - git push -f --tags
-          - git fetch origin
           - git checkout -b master
           - git merge $BITBUCKET_BRANCH
           - git push -f --tags
