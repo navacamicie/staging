@@ -35,8 +35,8 @@ pipelines:
           - git remote set-url origin https://${GitHub_User}:${GitHub_Token}@github.com/navacamicie/beta.git
           - git add .
           - git commit -a -m "auto build ${BITBUCKET_BUILD_NUMBER}"
-          - versiontag current
-          - versiontag patch  -m 'auto build ${BITBUCKET_BUILD_NUMBER}' --force
+          - ./versiontag current
+          - ./versiontag patch  -m 'auto build ${BITBUCKET_BUILD_NUMBER}' --force
           - git push -f
           - git fetch origin
           - git checkout -b master
@@ -52,7 +52,6 @@ pipelines:
           - git remote set-url origin https://${GitHub_User}:${GitHub_Token}@github.com/navacamicie/navacamicie.github.io.git
           - git add .
           - git commit -a -m "auto build ${BITBUCKET_BUILD_NUMBER}"
-          -
           - git push -f
           - git fetch origin
           - git checkout -b master
