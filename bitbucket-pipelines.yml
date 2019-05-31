@@ -28,6 +28,8 @@ definitions:
           - rm Gemfile*
           - rm *.md
           - rm -rf _posts
+        artifacts:
+          - build/*
 
 pipelines:
   branches:
