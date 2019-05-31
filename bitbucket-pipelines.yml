@@ -14,13 +14,12 @@ definitions:
         caches:
           - bundler
         script:
-          - mkdir build
           - bundle init
           - bundle install --path vendor/bundle
           - bundle add jekyll
           - bundle exec jekyll new --force --skip-bundle .
           - bundle install
-          - bundle exec jekyll build --destination build
+          - bundle exec jekyll build
           - ls build
           - rm bitbucket-pipelines.yml
           - rm -rf vendor
@@ -29,7 +28,7 @@ definitions:
           - rm *.md
           - rm -rf _posts
         artifacts:
-          - build/**
+          - _site/**
 
 pipelines:
   branches:
