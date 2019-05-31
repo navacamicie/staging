@@ -11,14 +11,9 @@ definitions:
   steps:
     - step: &build
         name: Build project
-        caches:
-          - bundler
         script:
-          - bundle init
-          - bundle install --path vendor/bundle
-          - bundle add jekyll
-          - bundle install
-          - bundle exec jekyll build
+          - gem install jekyll bundler
+          - jekyll build
           - rm bitbucket-pipelines.yml
           - rm -rf vendor
           - rm CNAME
