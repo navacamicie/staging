@@ -82,9 +82,13 @@ pipelines:
         deployment: production
         trigger: manual
         script:
+          - ./versiontag current
+          - ./versiontag major  -m "auto build ${BITBUCKET_BUILD_NUMBER}" --force
           - git remote set-url origin https://${GitHub_User}:${GitHub_Token}@github.com/navacamicie/navacamicie.github.io.git
           - git add .
           - git commit -a -m "auto build ${BITBUCKET_BUILD_NUMBER}"
-          - git push -f; git push --tags
+          - export git_last_tag=$(git describe --abbrev=0); echo ${git_last_tag}
+          - git push -f origin ${BITBUCKET_BRANCH}:master
+          - git push -f origin ${git_last_tag}
 
 
