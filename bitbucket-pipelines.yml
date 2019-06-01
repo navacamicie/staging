@@ -38,9 +38,7 @@ pipelines:
           - git add .
           - git commit -a -m "auto build ${BITBUCKET_BUILD_NUMBER}"
           - export git_last_tag=$(git describe --abbrev=0); echo ${git_last_tag}
-          - git push -u origin master
-          - git checkout -t origin/master
-          - git push origin ${git_last_tag}
+          - git push origin ${BITBUCKET_BRANCH}:master
 
     feature/*:
     - step: *build
@@ -56,9 +54,7 @@ pipelines:
           - git add .
           - git commit -a -m "auto build ${BITBUCKET_BUILD_NUMBER}"
           - export git_last_tag=$(git describe --abbrev=0); echo ${git_last_tag}
-          - git push -u origin master
-          - git checkout -t origin/master
-          - git push origin ${git_last_tag}
+          - git push origin ${BITBUCKET_BRANCH}:master
 
     develop:
     - step: *build
@@ -74,10 +70,8 @@ pipelines:
           - git add .
           - git commit -a -m "auto build ${BITBUCKET_BUILD_NUMBER}"
           - export git_last_tag=$(git describe --abbrev=0); echo ${git_last_tag}
-          - git push -f; git push origin ${git_last_tag}
-          - git push -u origin master
-          - git checkout -t origin/master
-          - git push origin ${git_last_tag}
+          - git push origin ${BITBUCKET_BRANCH}:master
+          #- git push origin ${git_last_tag}
 
     master:
     - step: *build
