@@ -37,8 +37,8 @@ pipelines:
           - git remote set-url origin https://${GitHub_User}:${GitHub_Token}@github.com/navacamicie/candidate-release.git
           - git add .
           - git commit -a -m "auto build ${BITBUCKET_BUILD_NUMBER}"
-          - ./versiontag current
-          - git push -f; git push --tags
+          - export git_last_tag=$(git describe --abbrev=0); echo ${git_last_tag}
+          - git push -f; git push origin ${git_last_tag}
           - git checkout -b master
           - git merge ${BITBUCKET_BRANCH}
           - git push -f; git push --tags
@@ -56,8 +56,8 @@ pipelines:
           - git remote set-url origin https://${GitHub_User}:${GitHub_Token}@github.com/navacamicie/sandbox.git
           - git add .
           - git commit -a -m "auto build ${BITBUCKET_BUILD_NUMBER}"
-          - ./versiontag current
-          - git push -f; git push --tags
+          - export git_last_tag=$(git describe --abbrev=0); echo ${git_last_tag}
+          - git push -f; git push origin ${git_last_tag}
           - git checkout -b master
           - git merge ${BITBUCKET_BRANCH}
           - git push -f; git push --tags
@@ -75,8 +75,8 @@ pipelines:
           - git remote set-url origin https://${GitHub_User}:${GitHub_Token}@github.com/navacamicie/staging.git
           - git add .
           - git commit -a -m "auto build ${BITBUCKET_BUILD_NUMBER}"
-          - ./versiontag current
-          - git push -f; git push --tags
+          - export git_last_tag=$(git describe --abbrev=0); echo ${git_last_tag}
+          - git push -f; git push origin ${git_last_tag}
           - git checkout -b master
           - git merge ${BITBUCKET_BRANCH}
           - git push -f; git push --tags
