@@ -1,3 +1,5 @@
 .bundle/
 versiontag
 _site/versiontag
+.idea
+.DS_Store
