@@ -18,7 +18,7 @@ name:
 subtitle:
 
 # Title attribute of HTML Page, uses 'name' from above if empty
-title: Country Rose di Nava Daniela - Nava Camicie Italia
+title: Country Rose SRL - Nava Camicie Italia
 
 # Information for web crawlers / Google, all of them optional
 # 'description' and 'keywords' simply set the corresponding meta tags,
@@ -174,7 +174,6 @@ links:
 
 # Extra HTML which will be displayed below the links. Keep it short. Leave empty to disable.
 #extra_html:
-extra_html: "COUNTRY ROSE di Nava Daniela<br> Via del Perosino, 30/L <br> 25046 CAZZAGO SAN MARTINO (Brescia) - Italia <br>  <br>Tel. +39 030 7751541 <br><br>Part. I.V.A. IT 01573520986 <br> Cod.
- Fisc NVA DNL 56T50 E271B "
+extra_html: "COUNTRY ROSE SRL<br> Via del Perosino, 30/L <br> 25046 CAZZAGO SAN MARTINO (Brescia) - Italia <br>  <br>Tel. +39 030 7751541 <br><br>Part. I.V.A. & Cod. Fisc. IT 04119800987 "
 
 #EOF
