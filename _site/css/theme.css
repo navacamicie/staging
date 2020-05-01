@@ -42,6 +42,7 @@ h1 {
   letter-spacing: 0.1em;
   font-size: 3em;
 }
+
 @media (max-width: 575.98px) {
   h1 {
     /* used on bootstrap size 'xs' */
@@ -58,6 +59,7 @@ div.row.links > div {
   white-space: nowrap;
   padding: 0;
 }
+
 div.row.links a {
   color: white;
   border-radius: 100%;
@@ -67,6 +69,7 @@ div.row.links a {
   line-height: 1em;
   overflow: hidden;
 }
+
 @media (max-width: 575.98px) {
   div.row.links a {
     /* used on bootstrap size 'xs' */
@@ -74,6 +77,7 @@ div.row.links a {
     width: 100%;
   }
 }
+
 div.row.links a:hover {
   text-decoration: none;
   -webkit-transition: 300ms;
@@ -81,10 +85,12 @@ div.row.links a:hover {
   transition: 300ms;
   background-color: rgba(0, 0, 0, 0.5);
 }
+
 div.row.links a > i {
   display: inline-block;
   margin: 16px 12px;
 }
+
 div.row.links a > span {
   margin-right: 15px;
 }
@@ -93,11 +99,13 @@ div.row.links a > span {
 .fuse-core-extra {
   color: rgba(255, 255, 255, 0.7);
 }
+
 .fuse-core-extra a {
   color: rgba(255, 255, 255, 0.9);
   border-radius: 3px;
   padding: 0 2px;
 }
+
 .fuse-core-extra a:hover {
   color: white;
   text-decoration: none;
@@ -115,13 +123,18 @@ footer {
   font-size: smaller;
   color: rgba(255, 255, 255, 0.4);
 }
+
 footer .col {
   padding: 0;
 }
+
 footer a {
   color: rgba(255, 255, 255, 0.6);
 }
+
 footer a:hover {
   text-decoration: none;
   color: white;
 }
+
+/*# sourceMappingURL=theme.css.map */

@@ -1,0 +1,92 @@
+# This is a sample build configuration for Other.
+# Check our guides at https://confluence.atlassian.com/x/5Q4SMw for more examples.
+# Only use spaces to indent your .yml configuration.
+# -----
+# You can specify a custom docker image from Docker Hub as your build environment.
+image: ruby:2.5
+
+definitions:
+  caches:
+    bundler: vendor/bundle
+  steps:
+    - step: &build
+        name: Build project
+        script:
+          - curl -L https://raw.githubusercontent.com/franiglesias/versiontag/master/versiontag -o versiontag
+          - chmod +x versiontag && ./versiontag help
+          - gem install jekyll
+          - jekyll build
+          - rm _site/bitbucket-pipelines.yml
+          - rm bitbucket-pipelines.yml
+        artifacts:
+          - _site/**
+          - versiontag
+
+pipelines:
+  branches:
+    release/*:
+    - step: *build
+    - step:
+        name: Deploy project (release)
+        deployment: test
+        script:
+          - rm CNAME
+          - rm _site/CNAME
+          - ./versiontag current
+          - ./versiontag major  -m "auto build ${BITBUCKET_BUILD_NUMBER}" --force
+          - git remote set-url origin https://${GitHub_User}:${GitHub_Token}@github.com/navacamicie/candidate-release.git
+          - git add .
+          - git commit -a -m "auto build ${BITBUCKET_BUILD_NUMBER}"
+          - export git_last_tag=$(git describe --abbrev=0); echo ${git_last_tag}
+          - git push -f origin ${BITBUCKET_BRANCH}:master
+          - git push -f origin ${git_last_tag}
+
+    feature/*:
+    - step: *build
+    - step:
+        name: Deploy project (feature)
+        deployment: test
+        script:
+          - rm CNAME
+          - rm _site/CNAME
+          - ./versiontag current
+          - ./versiontag patch  -m "auto build ${BITBUCKET_BUILD_NUMBER}" --force
+          - git remote set-url origin https://${GitHub_User}:${GitHub_Token}@github.com/navacamicie/sandbox.git
+          - git add .
+          - git commit -a -m "auto build ${BITBUCKET_BUILD_NUMBER}"
+          - export git_last_tag=$(git describe --abbrev=0); echo ${git_last_tag}
+          - git push -f origin ${BITBUCKET_BRANCH}:master
+          - git push -f origin ${git_last_tag}
+
+    develop:
+    - step: *build
+    - step:
+        name: Deploy project (develop)
+        deployment: test
+        script:
+          - rm CNAME
+          - rm _site/CNAME
+          - ./versiontag current
+          - ./versiontag minor  -m "auto build ${BITBUCKET_BUILD_NUMBER}" --force
+          - git remote set-url origin https://${GitHub_User}:${GitHub_Token}@github.com/navacamicie/staging.git
+          - git add .
+          - git commit -a -m "auto build ${BITBUCKET_BUILD_NUMBER}"
+          - export git_last_tag=$(git describe --abbrev=0); echo ${git_last_tag}
+          - git push -f origin ${BITBUCKET_BRANCH}:master
+          - git push -f origin ${git_last_tag}
+
+    master:
+    - step: *build
+    - step:
+        name: Deploy project (master)
+        deployment: production
+        trigger: manual
+        script:
+          - git remote set-url origin https://${GitHub_User}:${GitHub_Token}@github.com/navacamicie/navacamicie.github.io.git
+          - git add .
+          - git commit -a -m "auto build ${BITBUCKET_BUILD_NUMBER}"
+          - export git_last_tag=$(git describe --abbrev=0); echo ${git_last_tag}
+          - git push -f origin ${BITBUCKET_BRANCH}:master
+          - git push -f origin ${git_last_tag}
+
+
